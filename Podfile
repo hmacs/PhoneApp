@@ -8,5 +8,7 @@ target 'HMACS' do
   # Pods for HMACS
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Firestore'
   
 end
