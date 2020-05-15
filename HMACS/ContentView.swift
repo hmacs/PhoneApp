@@ -10,11 +10,18 @@ import SwiftUI
 import Firebase
 import FirebaseFirestore
 
+struct Product: Identifiable {
+    var id = UUID()
+    var name:String
+    var date:String
+}
+
 struct ContentView: View {
     @EnvironmentObject var core:Core
     @State var setUp = false
     @State var productName = ""
     @State var productExpirationDate = ""
+    @State var addedProducts:[Product]
 
     var body: some View {
         VStack{
@@ -24,10 +31,14 @@ struct ContentView: View {
                 VStack {
                     TextField("Add a Product", text: $productName).padding()
                     TextField("Expiration Date?", text: $productExpirationDate)
-                        .padding()
+                    .padding()
 
                     ScrollView{
-                        Text("This will be the ScrollView")
+                        if addedProducts.count > 0 {
+                            ForEach(addedProducts, id: \.id){ thisProduct in
+                                Text("\(thisProduct.name) || \(thisProduct.date)")
+                            }
+                        }
                     }.frame(width: UIScreen.main.bounds.size.width)
                         .background(Color.red)
                     Button(action: {
@@ -52,6 +63,29 @@ struct ContentView: View {
                     }
 
 
+                }.onAppear(){
+                    
+                    Firestore.firestore().collection("product")
+                        .addSnapshotListener { querySnapshot, error in
+                            guard let documents = querySnapshot?.documents else {
+                                print("Error fetching documents: \(error!)")
+                                return
+                            }
+
+                            let names = documents.map { $0["name"]! }
+                            let dates = documents.map { $0["date"]! }
+                            
+                            print(names)
+                            print(dates)
+                            
+                            
+                            for i in 0..<names.count {
+                                self.addedProducts.append(Product(
+                                    name: names[i] as? String ?? "Failed to get name",
+                                    date: dates[i] as? String ?? "Failed to get date"))
+                            }
+                    }
+                    
                 }
             }else{
                 VStack {
@@ -65,6 +99,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(addedProducts: [])
     }
 }
