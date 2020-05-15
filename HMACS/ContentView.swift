@@ -21,38 +21,38 @@ struct ContentView: View {
             
             if (core.isSetUp ?? false){
                 
-//                VStack {
-//                    TextField("Add a Product", text: $productName).padding()
-//                    TextField("Expiration Date?", text: $productExpirationDate)
-//                        .padding()
-//
-//                    ScrollView{
-//                        Text("This will be the ScrollView")
-//                    }.frame(width: UIScreen.main.bounds.size.width)
-//                        .background(Color.red)
-//                    Button(action: {
-//                        let productDictionary = [
-//                            "name":self.productName,
-//                            "expiration":self.productExpirationDate
-//                        ]
-//
-//                        let docRef = Firestore.firestore().document("product/\(UUID().uuidString)")
-//                        print("setting data")
-//                        docRef.setData(productDictionary){ (error) in
-//                            if let error = error {
-//                                print("error = \(error)")
-//                            } else {
-//                                print("data uploaded successfully")
-//                                self.productName = ""
-//                                self.productExpirationDate = ""
-//                            }
-//                        }
-//                    }){
-//                        Text("Add Product")
-//                    }
-//
-//
-//                }
+                VStack {
+                    TextField("Add a Product", text: $productName).padding()
+                    TextField("Expiration Date?", text: $productExpirationDate)
+                        .padding()
+
+                    ScrollView{
+                        Text("This will be the ScrollView")
+                    }.frame(width: UIScreen.main.bounds.size.width)
+                        .background(Color.red)
+                    Button(action: {
+                        let productDictionary = [
+                            "name":self.productName,
+                            "expiration":self.productExpirationDate
+                        ]
+
+                        let docRef = Firestore.firestore().document("product/\(UUID().uuidString)")
+                        print("setting data")
+                        docRef.setData(productDictionary){ (error) in
+                            if let error = error {
+                                print("error = \(error)")
+                            } else {
+                                print("data uploaded successfully")
+                                self.productName = ""
+                                self.productExpirationDate = ""
+                            }
+                        }
+                    }){
+                        Text("Add Product")
+                    }
+
+
+                }
             }else{
                 VStack {
                     FirstPage()
