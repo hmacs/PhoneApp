@@ -13,7 +13,7 @@ import FirebaseFirestore
 struct Product: Identifiable {
     var id = UUID()
     var name:String
-    var date:String
+    var expiration:String
 }
 
 struct ContentView: View {
@@ -36,7 +36,7 @@ struct ContentView: View {
                     ScrollView{
                         if addedProducts.count > 0 {
                             ForEach(addedProducts, id: \.id){ thisProduct in
-                                Text("\(thisProduct.name) || \(thisProduct.date)")
+                                Text("\(thisProduct.name) || \(thisProduct.expiration)")
                             }
                         }
                     }.frame(width: UIScreen.main.bounds.size.width)
@@ -73,7 +73,7 @@ struct ContentView: View {
                             }
 
                             let names = documents.map { $0["name"]! }
-                            let dates = documents.map { $0["date"]! }
+                            let dates = documents.map { $0["expiration"]! }
                             
                             print(names)
                             print(dates)
@@ -82,7 +82,7 @@ struct ContentView: View {
                             for i in 0..<names.count {
                                 self.addedProducts.append(Product(
                                     name: names[i] as? String ?? "Failed to get name",
-                                    date: dates[i] as? String ?? "Failed to get date"))
+                                    expiration: dates[i] as? String ?? "Failed to get date"))
                             }
                     }
                     
