@@ -51,6 +51,11 @@ struct SignUp: View {
                 }
                 ) {
                     Text("Create Account")
+                    .frame(width: 300, height: 50)
+                    .background(Color.green)
+                    .cornerRadius(10)
+                    .padding()
+                        .foregroundColor(Color.white)
                 }
             }
         }

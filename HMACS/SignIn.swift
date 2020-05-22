@@ -47,7 +47,11 @@ struct SignIn: View {
                     
                 }) {
                 Text("Sign In")
-                }
+                    .frame(width: 300, height: 50)
+                    .background(Color.red)
+                    .cornerRadius(10)
+                    .foregroundColor(Color.white)
+                }.padding()
             }.navigationBarTitle("Sign In")
         }
     }
