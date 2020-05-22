@@ -23,7 +23,7 @@ struct SignIn: View {
             if error != nil {
                 print("\(String(describing: error))")
             } else {
-                self.email = ""
+                self.email = "" 
                 self.password = ""
                 self.presentationMode.wrappedValue.dismiss()
             }
@@ -33,6 +33,7 @@ struct SignIn: View {
     var body: some View {
         NavigationView {
             VStack{
+                
                 Form{
                     Section(header: Text("Please Enter Account Information")){
                         TextField("Email", text: $email)
